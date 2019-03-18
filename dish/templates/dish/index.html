@@ -38,6 +38,7 @@
 
 <div style="float:left;">
 <form>
+        <label for="">Основні страви</label>
 <fieldset id="main_group">
     <input type="radio" name="main_dish" checked value="0">Null/Нічого<br>
     {% for main in all_mains %}
@@ -47,6 +48,7 @@
 </form>
 
     <form>
+            <label for="">Салати</label>
 <fieldset id="salad_group">
     <input type="radio" name="salad" checked value="0">Null/Нічого<br>
     {% for salad in all_salads %}
@@ -56,7 +58,9 @@
 </form>
 
 <form>
+            <label for="">Соуси</label>
 <fieldset id="sauce_group">
+
     <input type="radio" name="sauce_dish" checked value="0">Null/Нічого<br>
     {% for sauce in all_sauces %}
         <input type="radio" name="sauce_dish" value="{{sauce.id}}">{{ sauce.name }}<br>
@@ -67,6 +71,7 @@
 
 
 <form>
+        <label for="">Гарніри</label>
 <fieldset id="side_group">
     <input type="radio" name="side_dish" checked value="0">Null/Нічого<br>
     {% for side in all_sides %}
@@ -77,6 +82,7 @@
 
 
 <form>
+        <label for="">Напої</label>
 <fieldset id="drink_group">
     <input type="radio" name="drink" checked value="0">Null/Нічого<br>
     {% for drink in all_drinks %}
@@ -89,6 +95,7 @@
 
 
 <form>
+    <label for="">Додатково</label>
 <fieldset id="addon_group">
     <input type="radio" name="addon"  checked value="0">Null/Нічого<br>
     {% for addon in all_addons %}
@@ -97,6 +104,7 @@
 </fieldset>
 </form>
 
+<label for="">Загалом</label>
 <textarea name="final" row="20" style="width:200px;height:200px;">
 </textarea>
 
