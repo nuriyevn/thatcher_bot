@@ -1,0 +1,110 @@
+{% load staticfiles %}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'dish/js/index.js' %}"></script>
+
+</head>>
+<body>
+<br>
+
+
+<div>
+
+
+<form style="float:left;">
+    <label for="">Супи</label>
+<fieldset id="soup_group">
+    <input type="radio" name="soup"  checked value="0">Null/Нічого<br>
+    {% for soup in all_soup %}
+        <input type="radio" name="soup" value="{{ soup.id }}">{{ soup.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+<form >
+    <label for="">Брускети</label>
+<fieldset id="bruschetta_group">
+    <input type="radio" name="bruschetta" checked value="0">Null/Нічого<br>
+    {% for bruschetta in all_bruschettas %}
+        <input type="radio" name="bruschetta" value="{{ bruschetta.id }}">{{ bruschetta.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+</div>
+
+
+<div style="float:left;">
+<form>
+<fieldset id="main_group">
+    <input type="radio" name="main_dish" checked value="0">Null/Нічого<br>
+    {% for main in all_mains %}
+        <input type="radio" name="main_dish" value="{{main.id}}">{{ main.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+    <form>
+<fieldset id="salad_group">
+    <input type="radio" name="salad" checked value="0">Null/Нічого<br>
+    {% for salad in all_salads %}
+        <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+<form>
+<fieldset id="sauce_group">
+    <input type="radio" name="sauce_dish" checked value="0">Null/Нічого<br>
+    {% for sauce in all_sauces %}
+        <input type="radio" name="sauce_dish" value="{{sauce.id}}">{{ sauce.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+</div>
+
+
+<form>
+<fieldset id="side_group">
+    <input type="radio" name="side_dish" checked value="0">Null/Нічого<br>
+    {% for side in all_sides %}
+        <input type="radio" name="side_dish" value="{{side.id}}">{{ side.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+
+<form>
+<fieldset id="drink_group">
+    <input type="radio" name="drink" checked value="0">Null/Нічого<br>
+    {% for drink in all_drinks %}
+        <input type="radio" name="drink" value="{{drink.id}}">{{ drink.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+
+
+
+<form>
+<fieldset id="addon_group">
+    <input type="radio" name="addon"  checked value="0">Null/Нічого<br>
+    {% for addon in all_addons %}
+        <input type="radio" name="addon" value="{{ addon.id }}">{{ addon.name }}<br>
+    {% endfor %}
+</fieldset>
+</form>
+
+<textarea name="final" row="20" style="width:200px;height:200px;">
+</textarea>
+
+<label style="color:green;" id="sum">Сума: </label>
+<button id="sendDinner">Відправити у обіди</button>
+
+
+<label style="color:green;" id="status">Статус відправки замовлення у групу: </label>
+
+</body>
+
