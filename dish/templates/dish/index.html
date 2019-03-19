@@ -11,7 +11,7 @@
      $('button[id="sendDinner"]').on('click', function(){
         $('#status').text("Статус відправки замовлення у групу: ")
         var dishesList = $('textarea[name="final"]').val();
-        var textToSend ="Увага! Тестове замовлення через telegram bot!%0A%0A"
+        var textToSend ="Замовлення через http://nuriyevn.pythonanywhere.com/dish/!%0A%0A"
         textToSend += dishesList
         textToSend = textToSend.replace(/(?:\r\n|\r|\n)/g, '%0A');
 
