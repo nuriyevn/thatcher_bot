@@ -4,7 +4,7 @@ from django.http import Http404, HttpResponseRedirect
 from .forms import DishForm
 from dish.models import DishType, Dish
 
-
+import os
 def calculate(request):
 
     sum = 0
@@ -36,6 +36,9 @@ def calculate(request):
 
 
 def index(request):
+    print(os.path.abspath(__file__))
+
+
     all_dishes = Dish.objects.all()
 
     soup = DishType.objects.filter(name='soup')
