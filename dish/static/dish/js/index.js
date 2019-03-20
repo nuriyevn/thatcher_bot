@@ -1,5 +1,6 @@
 $(document).ready(function() {
      $('button[id="sendDinner"]').on('click', function(){
+        $('#person').val()
         $('#status').text("Статус відправки замовлення у групу: ")
         var dishesList = $('textarea[name="final"]').val();
         var textToSend ="Увага! Тестове замовлення через telegram bot!%0A%0A"

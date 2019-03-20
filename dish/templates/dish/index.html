@@ -8,24 +8,43 @@
 
     <script>
         $(document).ready(function() {
-     $('button[id="sendDinner"]').on('click', function(){
+
+
+     $('button[id="sendDinner2"]').on('click', function(){
         $('#status').text("Статус відправки замовлення у групу: ")
         var dishesList = $('textarea[name="final"]').val();
         var textToSend ="Замовлення через http://nuriyevn.pythonanywhere.com/dish/!%0A%0A"
+        textToSend += $('#person').val() + "%0A%0A"
         textToSend += dishesList
+
+
+        $.ajax({
+            url: 'https://api.telegram.org/bot800787990:AAHo4OBTilvKuOiEpInOvICNFIfEw_rAYek/getMe',
+            type:'GET',
+            // 128501515
+            data: null,
+            complete: function(event)
+            {
+                console.log(event.responseText);
+            }
+
+        });
+
         textToSend = textToSend.replace(/(?:\r\n|\r|\n)/g, '%0A');
+
 
         if (dishesList.trim().length > 0)
             $.ajax({
                 url: 'https://api.telegram.org/bot800787990:AAHo4OBTilvKuOiEpInOvICNFIfEw_rAYek/sendMessage',
                 type:'GET',
-                data: 'chat_id=-128501515&parseMode=html&text=' + textToSend,
+                // 128501515 - тестова група
+                // 254455448 -  група обіди
+                data: 'chat_id=-254455448&parseMode=html&text=' + textToSend,
                 complete: function(event)
                 {
                     console.log(event)
 
                 }
-
             });
 
         else
@@ -80,10 +99,10 @@
 
 
 <div>
-
-
+    <label>Ім'я</label>
+<input id="person"  type="text" value="">
 <form style="float:left;">
-    <label for="">Супи</label>
+    <label for="">Супи {{ soup_price }}</label>
 <fieldset id="soup_group">
     <input type="radio" name="soup"  checked value="0">Null/Нічого<br>
     {% for soup in all_soup %}
@@ -93,7 +112,7 @@
 </form>
 
 <form >
-    <label for="">Брускети</label>
+    <label for="">Брускети {{ bruschetta_price }}</label>
 <fieldset id="bruschetta_group">
     <input type="radio" name="bruschetta" checked value="0">Null/Нічого<br>
     {% for bruschetta in all_bruschettas %}
@@ -104,66 +123,71 @@
 </div>
 
 
-<div style="float:left;">
-<form>
-        <label for="">Основні страви</label>
-<fieldset id="main_group">
-    <input type="radio" name="main_dish" checked value="0">Null/Нічого<br>
-    {% for main in all_mains %}
-        <input type="radio" name="main_dish" value="{{main.id}}">{{ main.name }}<br>
-    {% endfor %}
-</fieldset>
-</form>
-
     <form>
             <label for="">Салати</label>
 <fieldset id="salad_group">
     <input type="radio" name="salad" checked value="0">Null/Нічого<br>
     {% for salad in all_salads %}
-        <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }}<br>
+        <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }} - {{ salad.cost }} <br>
     {% endfor %}
 </fieldset>
 </form>
 
-<form>
-            <label for="">Соуси</label>
-<fieldset id="sauce_group">
 
-    <input type="radio" name="sauce_dish" checked value="0">Null/Нічого<br>
-    {% for sauce in all_sauces %}
-        <input type="radio" name="sauce_dish" value="{{sauce.id}}">{{ sauce.name }}<br>
-    {% endfor %}
-</fieldset>
-</form>
+<div style="border: solid 1px black; ">
+                    <div style="float:left;">
+            <form>
+                    <label for="">Основні страви {{ main_price }}</label>
+            <fieldset id="main_group">
+                <input type="radio" name="main_dish" checked value="0">Null/Нічого<br>
+                {% for main in all_mains %}
+                    <input type="radio" name="main_dish" value="{{main.id}}">{{ main.name }}<br>
+                {% endfor %}
+            </fieldset>
+            </form>
+
+
+
+            <form>
+                        <label for="">Соуси</label>
+            <fieldset id="sauce_group">
+
+                <input type="radio" name="sauce_dish" checked value="0">Null/Нічого<br>
+                {% for sauce in all_sauces %}
+                    <input type="radio" name="sauce_dish" value="{{sauce.id}}">{{ sauce.name }}<br>
+                {% endfor %}
+            </fieldset>
+            </form>
+            </div>
+
+
+            <form>
+                    <label for="">Гарніри</label>
+            <fieldset id="side_group">
+                <input type="radio" name="side_dish" checked value="0">Null/Нічого<br>
+                {% for side in all_sides %}
+                    <input type="radio" name="side_dish" value="{{side.id}}">{{ side.name }}<br>
+                {% endfor %}
+            </fieldset>
+            </form>
+
+
+            <form>
+                    <label for="">Напої</label>
+            <fieldset id="drink_group">
+                <input type="radio" name="drink" checked value="0">Null/Нічого<br>
+                {% for drink in all_drinks %}
+                    <input type="radio" name="drink" value="{{drink.id}}">{{ drink.name }}<br>
+                {% endfor %}
+            </fieldset>
+            </form>
+
 </div>
 
 
-<form>
-        <label for="">Гарніри</label>
-<fieldset id="side_group">
-    <input type="radio" name="side_dish" checked value="0">Null/Нічого<br>
-    {% for side in all_sides %}
-        <input type="radio" name="side_dish" value="{{side.id}}">{{ side.name }}<br>
-    {% endfor %}
-</fieldset>
-</form>
-
 
 <form>
-        <label for="">Напої</label>
-<fieldset id="drink_group">
-    <input type="radio" name="drink" checked value="0">Null/Нічого<br>
-    {% for drink in all_drinks %}
-        <input type="radio" name="drink" value="{{drink.id}}">{{ drink.name }}<br>
-    {% endfor %}
-</fieldset>
-</form>
-
-
-
-
-<form>
-    <label for="">Додатково</label>
+    <label for="">Додатково {{ addon_price }}</label>
 <fieldset id="addon_group">
     <input type="radio" name="addon"  checked value="0">Null/Нічого<br>
     {% for addon in all_addons %}
@@ -177,7 +201,7 @@
 </textarea>
 
 <label style="color:green;" id="sum">Сума: </label>
-<button id="sendDinner">Відправити у обіди</button>
+<!--button id="sendDinner">Відправити у обіди</button-->
 
 
 <label style="color:green;" id="status">Статус відправки замовлення у групу: </label>

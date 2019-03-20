@@ -67,6 +67,11 @@ def index(request):
     addon = DishType.objects.filter(name='add_on')
     all_addons= Dish.objects.filter(type=addon[0])
 
+    soup_price =  DishType.objects.filter(name='soup')[0].generic_price
+    bruschetta_price = DishType.objects.filter(name='bruschetta')[0].generic_price
+    main_price = DishType.objects.filter(name='main_dish')[0].generic_price
+    addon_price = DishType.objects.filter(name='add_on')[0].generic_price
+
     form = DishForm(request.POST or None)
     context = {
         'form': form,
@@ -78,5 +83,9 @@ def index(request):
                                                'all_sauces': all_sauces,
                                                'all_drinks':all_drinks,
                                                'all_salads':all_salads,
-                                               'all_addons':all_addons} , context)
+                                               'all_addons':all_addons,
+                                               'soup_price':soup_price,
+                                               'bruschetta_price':bruschetta_price,
+                                               'main_price': main_price,
+                                               'addon_price': addon_price} , context)
 
