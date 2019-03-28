@@ -304,7 +304,7 @@
 <fieldset id="salad_group">
     <input type="radio" name="salad" checked value="0">Null/Нічого<br>
     {% for salad in all_salads %}
-        <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }} - {{ salad.cost }} <br>
+    <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }}<span> - {{ salad.cost }} </span><br>
     {% endfor %}
 </fieldset>
 </form>
