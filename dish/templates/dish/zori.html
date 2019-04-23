@@ -292,7 +292,7 @@
                 </form>
 
                 <form>
-                        <label for="">Напої</label>
+                        <label for="">Багатий вибір Напоїв</label>
                     <input type="button" id="drinkClear" value="Очистити"/>
                 <fieldset id="drink_group">
                     <input type="radio" name="drink" checked value="0">Null/Нічого<br>
@@ -316,7 +316,7 @@
 <fieldset id="salad_group">
     <input type="radio" name="salad" checked value="0">Null/Нічого<br>
     {% for salad in all_salads %}
-    <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }}<span> - {{ salad.cost }} </span><br>
+    <input type="radio" name="salad" value="{{ salad.id }}">{{ salad.name }}<br>
     {% endfor %}
 </fieldset>
 </form>
