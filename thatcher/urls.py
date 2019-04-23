@@ -19,6 +19,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'dish/', include('dish.urls')),
+    url(r'order/', include('dish.urls')),
 
 ]

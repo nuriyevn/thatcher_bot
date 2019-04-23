@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class DishType(models.Model):
     name = models.CharField(default='', max_length=256)
     # salad price is in dishes
@@ -10,11 +9,18 @@ class DishType(models.Model):
     def __str__(self):
         return self.name
 
+class Provider(models.Model):
+    name = models.CharField(default='', max_length=256)
+    def __str__(self):
+        return self.name
+
+
 class Dish(models.Model):
     name = models.CharField(default='Default Dish', max_length=256)
     type = models.ForeignKey(DishType, on_delete=models.CASCADE)
     description = models.CharField(max_length=256, default='default')
     cost = models.FloatField(default=0.0)
+    provider = models.ForeignKey(Provider, default=2, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name + ' - ' + self.type.name

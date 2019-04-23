@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404, HttpResponseRedirect
 from .forms import DishForm
-from dish.models import DishType, Dish
+from dish.models import DishType, Dish, Provider
 
 import os
 def secure(request):
@@ -39,38 +39,72 @@ def calculate(request):
 
     return HttpResponse(sum)
 
+def zori(request):
 
-def index(request):
+    provider = Provider.objects.get(name='zori')
+    soup = DishType.objects.filter(name='soup')
+    all_soup = Dish.objects.filter(type=soup[0],  provider=provider.id)
+
+    main_dish = DishType.objects.filter(name='main_dish')
+    all_mains = Dish.objects.filter(type=main_dish[0],  provider=provider.id)
+
+    side_dish = DishType.objects.filter(name='side_dish')
+    all_sides = Dish.objects.filter(type=side_dish[0], provider=provider.id)
+
+    drink = DishType.objects.filter(name='drink')
+    all_drinks = Dish.objects.filter(type=drink[0], provider=provider.id)
+
+    salad = DishType.objects.filter(name='salad')
+    all_salads = Dish.objects.filter(type=salad[0], provider=provider.id)
+
+
+    form = DishForm(request.POST or None)
+    context = {
+        'form': form,
+    }
+
+    context = {
+    }
+
+    return render(request, "dish/zori.html",  {'provider_name':provider.name,
+                                               'all_soup':all_soup,
+                                               'all_mains':all_mains,
+                                               'all_sides':all_sides,
+                                               'all_drinks':all_drinks,
+                                               'all_salads':all_salads} ,  context )
+
+
+def thatcher(request):
     print(os.path.abspath(__file__))
-
+    provider = Provider.objects.get(name='thatcher')
 
     all_dishes = Dish.objects.all()
 
     soup = DishType.objects.filter(name='soup')
-    all_soup = Dish.objects.filter(type=soup[0])
+    all_soup = Dish.objects.filter(type=soup[0], provider=provider.id)
 
     bruschetta = DishType.objects.filter(name='bruschetta')
-    all_bruschettas =  Dish.objects.filter(type=bruschetta[0])
+    all_bruschettas =  Dish.objects.filter(type=bruschetta[0], provider=provider.id)
 
 
     main_dish = DishType.objects.filter(name='main_dish')
-    all_mains = Dish.objects.filter(type=main_dish[0])
+    all_mains = Dish.objects.filter(type=main_dish[0], provider=provider.id)
 
     side_dish = DishType.objects.filter(name='side_dish')
-    all_sides = Dish.objects.filter(type=side_dish[0])
+    all_sides = Dish.objects.filter(type=side_dish[0], provider=provider.id)
 
 
     sauce = DishType.objects.filter(name='sauce')
-    all_sauces = Dish.objects.filter(type=sauce[0])
+    all_sauces = Dish.objects.filter(type=sauce[0], provider=provider.id)
 
     drink = DishType.objects.filter(name='drink')
-    all_drinks = Dish.objects.filter(type=drink[0])
+    all_drinks = Dish.objects.filter(type=drink[0], provider=provider.id)
 
     salad = DishType.objects.filter(name='salad')
-    all_salads = Dish.objects.filter(type=salad[0])
+    all_salads = Dish.objects.filter(type=salad[0], provider=provider.id)
 
     addon = DishType.objects.filter(name='add_on')
-    all_addons= Dish.objects.filter(type=addon[0])
+    all_addons= Dish.objects.filter(type=addon[0], provider=provider.id)
 
     soup_price =  DishType.objects.filter(name='soup')[0].generic_price
     bruschetta_price = DishType.objects.filter(name='bruschetta')[0].generic_price
@@ -81,7 +115,9 @@ def index(request):
     context = {
         'form': form,
     }
-    return render(request, 'dish/index.html', {'all_bruschettas' : all_bruschettas,
+    return render(request, 'dish/thatcher.html', {
+            'provider_name':provider.name,
+                                                'all_bruschettas' : all_bruschettas,
                                                'all_soup':all_soup,
                                                'all_mains':all_mains,
                                                'all_sides':all_sides,

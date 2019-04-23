@@ -1,7 +1,9 @@
+{% extends 'dish/base.html' %}
+
 {% load staticfiles %}
 
-<html>
-<head>
+
+{% block head %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -98,6 +100,7 @@
             }
         })
 
+/*
         console.log(ids);
         $.ajax({
             url: '/dish/calculate',
@@ -112,6 +115,7 @@
                 $('#sum').text(old + event.responseText + ' грн.');
             }
         })
+        */
 
         $('textarea[name="final"]').val(final);
      })
@@ -208,10 +212,12 @@
 
     </script>
 
-</head>
-<body>
-<br>
+{% endblock %}
 
+{% block body %}
+{{ block.super }}
+<!--div style="text-align:center;"><h1>ZORI</h1></div-->
+<br>
 <div class="container">
     <div class="row">
         <!--label>Ім'я</label>
@@ -228,7 +234,7 @@
     </form>
 
 
-            <form >
+            <!--form >
         <label for="">Брускети {{ bruschetta_price }}</label>
                 <input type="button" id="bruschettaClear" value="Очистити"/>
     <fieldset id="bruschetta_group">
@@ -237,7 +243,7 @@
             <input type="radio" name="bruschetta" value="{{ bruschetta.id }}">{{ bruschetta.name }}<br>
         {% endfor %}
     </fieldset>
-    </form>
+    </form-->
     </div>
 </div>
 
@@ -262,7 +268,7 @@
                 </fieldset>
                 </form>
 
-                <form>
+                <!--form>
                             <label for="">Соуси</label>
                     <input type="button" id="sauce_dishClear" value="Очистити"/>
                 <fieldset id="sauce_group">
@@ -272,7 +278,7 @@
                         <input type="radio" name="sauce_dish" value="{{sauce.id}}">{{ sauce.name }}<br>
                     {% endfor %}
                 </fieldset>
-                </form>
+                </form-->
 
                 <form>
                         <label for="">Гарніри</label>
@@ -315,16 +321,16 @@
 </fieldset>
 </form>
 
-            <form>
+            <!--form>
                 <label for="">Додатково {{ addon_price }}</label>
                 <input type="button" id="addonClear" value="Очистити"/>
-        <fieldset id="addon_group">
-            <input type="radio" name="addon"  checked value="0">Null/Нічого<br>
-            {% for addon in all_addons %}
-                <input type="radio" name="addon" value="{{ addon.id }}">{{ addon.name }}<br>
-            {% endfor %}
-        </fieldset>
-        </form>
+            <fieldset id="addon_group">
+                <input type="radio" name="addon"  checked value="0">Null/Нічого<br>
+                {% for addon in all_addons %}
+                    <input type="radio" name="addon" value="{{ addon.id }}">{{ addon.name }}<br>
+                {% endfor %}
+            </fieldset>
+            </form-->
     </div>
 </div>
 
@@ -351,5 +357,5 @@
     <div class="row"><label style="color:green;margin-left:5px;" id="sum">Сума: </label></div>
 </div>
 
-</body>
 
+{% endblock %}
