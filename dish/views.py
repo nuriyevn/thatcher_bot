@@ -5,6 +5,11 @@ from .forms import DishForm
 from dish.models import DishType, Dish
 
 import os
+def secure(request):
+    return render(request, 'dish/secureinput.html', {})
+def sign(request):
+    return render(request, 'dish/sign.html', {})
+
 def calculate(request):
 
     sum = 0
