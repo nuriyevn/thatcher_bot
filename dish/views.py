@@ -3,8 +3,20 @@ from django.http import HttpResponse
 from django.http import Http404, HttpResponseRedirect
 from .forms import DishForm
 from dish.models import DishType, Dish, Provider
-
+from django.conf import settings
 import os
+
+def setting(request):
+    STATIC_ROOT = getattr(settings, "STATIC_ROOT", None)
+    STATIC_URL= getattr(settings, "STATIC_URL", None)
+    STATICFILES_DIR= getattr(settings, "STATICFILES_DIR", None)
+
+    return HttpResponse('static_root={static_root}; static_url={static_url}; staticfiles_dirs={staticfiles_dirs};'.format(
+        static_root=STATIC_ROOT,
+        static_url=STATIC_URL,
+        staticfiles_dirs=STATICFILES_DIR
+    ))
+
 def secure(request):
     return render(request, 'dish/secureinput.html', {})
 def sign(request):
