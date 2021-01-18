@@ -6,10 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    <!--script src="{% static 'dish/js/index.js' %}"></script-->
     <style>
-
         .border_row {
             border: 1px solid orange;
             margin: 12px;
@@ -22,16 +19,10 @@
             border-radius: 2px;
         }
         #copyButton {
-
-
-
             color:green;
             height:200px;
             width:100%;
         }
-
-
-
     </style>
     <script>
         $(document).ready(function() {
@@ -44,8 +35,7 @@
         textToSend += $('#person').val() + "%0A%0A"
         textToSend += dishesList
 
-
-        $.ajax({
+         $.ajax({
             url: 'https://api.telegram.org/bot800787990:AAHo4OBTilvKuOiEpInOvICNFIfEw_rAYek/getMe',
             type:'GET',
             // 128501515
@@ -59,7 +49,6 @@
 
         textToSend = textToSend.replace(/(?:\r\n|\r|\n)/g, '%0A');
 
-
         if (dishesList.trim().length > 0)
             $.ajax({
                 url: 'https://api.telegram.org/bot800787990:AAHo4OBTilvKuOiEpInOvICNFIfEw_rAYek/sendMessage',
@@ -70,7 +59,6 @@
                 complete: function(event)
                 {
                     console.log(event)
-
                 }
             });
 
@@ -78,8 +66,6 @@
         {
             $('#status').text("Пусте замовлення")
         }
-
-
         console.log("Send pressed")
      });
 
@@ -204,8 +190,6 @@
         return succeed;
     }
 });
-
-
     </script>
 
 </head>
